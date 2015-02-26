@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+{% autoescape true %}
+<html>
+	<head>
+		<meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+		<meta name="viewport" content="width=device-width" >
+		<title>Contact List</title>
+		<link type="text/css" rel="stylesheet" href="/stylesheets/main.css" />
+		<script>
+			function RadioSet(){
+				var radios = document.getElementsByName("edit");
+				for(var i = 0; i < radios.length; i++){
+					radios[i].checked = false;
+				}
+			}
+
+			function EditthisEntry(editid) {
+				var formid = "form" + editid;
+				var allforms = document.getElementsByClassName('showform');
+				for(var i = 0; i < allforms.length; i++){
+					allforms[i].style.display = 'none';
+				}
+				if (document.getElementById(editid).checked) {
+    				document.getElementById(formid).style.display = 'block';
+				} else {
+    				document.getElementById(formid).style.display = 'none';
+				}
+			}
+		</script>
+	</head>
+	<body onload="RadioSet()">
+		<h1>Contact List</h1>
+		{% if not showlink %}
+		<form action="/filter" method="post">
+			<select name="statefilter" id="statefilter" >
+				<option value="Select state">---Select---</option>
+				{% for option in optionsbox %}
+				<option value="{{ option.state }}" >{{ option.state }}</option>
+				{% endfor %}
+			</select>
+			<input type="Submit" value="Filter" class="filter">
+		</form>
+		{% endif %}
+		<ul>
+		{% for contact in contacts %}
+			<li>
+			{% if contact.avatar %}
+				<div class="avatar"><img src="/img?img_id={{ contact.key() }}" alt="avatar"></div>
+			{% endif %}
+			<div class="flname"><blockquote>{{ contact.firstname }} {{ contact.lastname }}</blockquote></div>
+			<div class="email"><blockquote>{{ contact.email }}</blockquote></div>
+			<div class="address"><blockquote>{{ contact.address }}</blockquote></div>
+			<div class="citystate"><blockquote>{{ contact.city }}, {{ contact.state }}</blockquote></div>
+			<div class="phone"><blockquote>{{ contact.phone }}</blockquote></div>
+			<div class="editradio">
+				<label>Edit Contact</label>
+				<input type="radio" onclick="EditthisEntry({{ contact.key().id() }})" name="edit" id="{{ contact.key().id() }}" value="{{ contact.key().id() }}" >
+			</div>
+			<div class="showform" id="form{{ contact.key().id() }}" style="display:none">
+				<form action="/sign?contactlist_name={{ contactlist_name }}" method="post" enctype="multipart/form-data">
+					<div class="contactform">
+						<label>First Name: </label>
+						<input type="text" name="firstname" value="{{ contact.firstname }}" >
+						<label>Last Name: </label>
+						<input type="text" name="lastname" value="{{ contact.lastname }}" >
+						<label>Email: </label>
+						<input type="text" name="email" value="{{ contact.email }}" > 
+						<label>Address: </label>
+						<input type="text" name="address" value="{{ contact.address }}" >
+						<label>City: </label>
+						<input type="text" name="city" value="{{ contact.city }}" >
+						<label>State: </label>
+						<input type="text" name="state" value="{{ contact.state }}" >
+						<label>Phone: </label> 
+						<input type="text" name="phone" value="{{ contact.phone }}" >
+					</div>
+					<div class="avatarform">
+						<label>Upload Avatar Photo: </label>
+						<input type="file" name="img" >
+					</div>
+					<input type="hidden" name="contact_key" value={{ contact.key() }}>
+					<input type="submit" value="Edit {{ contact.firstname }}'s Info">
+				</form>
+			</div>
+			<br />
+			</li>
+		{% endfor %}
+		</ul>
+
+		<div class="bottom">
+			<div class="editradio">
+				<input type="radio" onclick="EditthisEntry(0)" name="edit" id="0" value="0" >
+				<label>Add New Entry</label>
+			</div>
+			<div class="showform" id="form0" style="display:none">
+				<form action="/sign?contactlist_name={{ contactlist_name }}" method="post" enctype="multipart/form-data">
+					<div class="contactform">
+						<label>First Name: </label>
+						<input type="text" name="firstname" >
+						<label>Last Name: </label>
+						<input type="text" name="lastname" >
+						<label>Email: </label>
+						<input type="text" name="email" >
+						<label>Address: </label>
+						<input type="text" name="address" >
+						<label>City: </label>
+						<input type="text" name="city" >
+						<label>State: </label>
+						<input type="text" name="state" >
+						<label>Phone: </label>
+						<input type="text" name="phone" >
+					</div>
+					<div class="avatarform">
+						<label>Upload Avatar Photo: </label>
+						<input type="file" name="img" >
+					</div>
+					<input type="submit" value="Submit" >
+				</form>
+			</div>
+			<br>
+			<hr>
+		
+			<form>
+				<input type="hidden" value="{{ guestbook_name }}" name="guestbook_name">
+			</form>
+
+			{% if showlink %}
+			<form method="link" action="{{ url|safe }}">
+				<input type="submit" value="{{ url_linktext }}">
+			</form>
+			{% endif %}
+		</div>
+	</body>
+</html>
+{% endautoescape %}

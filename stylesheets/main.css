@@ -1,0 +1,191 @@
+@media screen and (max-width: 480px){
+	*{margin: 0; padding: 0;}
+
+	body {
+		font-family: Verdana, Helvetica, sans-serif;
+		background-color: #DDDDDD;
+		width: 100%;
+	}
+
+	h1{
+		font-size: 1em;
+		color: #DDDDDD;
+		background-color: #222222;
+	}
+
+	ul{
+		display: block;
+		vertical-align: middle;
+	}
+
+	li{
+		margin: 5px;
+		border-bottom: 1px solid #222222;
+		padding: 15px;
+		overflow: auto;
+		float: left;
+		display: -miz-inline-stack;
+		display: inline-block;
+		*display: inline;
+		vertical-align: middle;
+		width: 100%;
+	}
+
+	input{
+		width: auto;
+		height: auto;
+	}
+
+	.filter{
+		width: auto;
+		height: auto;
+	}
+
+	@media orientation: landscape{
+		li{
+			width: 45%;
+		}
+
+		input{
+			width: 1em;
+			height: 1em;
+		}
+	}
+
+	li:checked{
+		
+	}
+
+	.showform{
+		display: block;
+		width: 100%;
+	}
+
+	.avatar{
+		float: left;
+	}
+
+	.flname{
+		font-size: 1em;
+	}
+
+	.email{
+		font-size: .8em;
+	}
+
+	.address{
+		font-size: .8em;
+	}
+
+	.citystate{
+		font-size: .8em;
+	}
+
+	.phone{
+		font-size: .8em;
+	}
+
+
+	.editradio{
+
+	}
+
+	.contactform{
+		width: 45%;
+	}
+
+	.avatarform{
+
+	}
+
+	.bottom{
+		display: table;
+		width: 100%;
+	}
+}
+
+@media screen and (min-width: 481px){
+	body {
+		font-family: Verdana, Helvetica, sans-serif;
+		background-color: #DDDDDD;
+		float: center;
+
+	}
+
+	h1{
+		font-size: 1em;
+		color: #DDDDDD;
+		background-color: #222222;
+	}
+
+	ul{
+		min-width: 30em;
+		max-width: 50em;
+		margin: 10px;
+		display: inline-block;
+		vertical-align: top;
+	}
+
+	li{
+		padding: 10px;
+		min-width: 10em;
+		border-bottom: 1px solid #222222;
+		float: left;
+		min-height: 15em;
+		overflow: hidden;
+		display: inline-block;
+		vertical-align: top;
+	}
+
+	li:checked{
+
+	}
+
+	li:hover{
+		background-color: #CCCCCC;
+	}
+
+	.showform{
+		padding: 10px;
+		display: flex;
+		min-width: 50em;
+	}
+
+	.avatar{
+		padding: 12px;
+		float: left;
+		max-height: 10em;
+	}
+
+	.flname{
+		font-size: 1em;
+	}
+
+	.email{
+		font-size: .8em;
+	}
+
+	.address{
+		font-size: .8em;
+	}
+
+	.citystate{
+		font-size: .8em;
+	}
+
+	.phone{
+		font-size: .8em;
+	}
+
+	.editradio{
+
+	}
+
+	.contactform{
+
+	}
+
+	.avatarform{
+
+	}
+}
